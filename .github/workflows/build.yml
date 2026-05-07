@@ -63,3 +63,5 @@ jobs:
             "platform-tools" \
             "platforms;android-33" \
             "build-tools;33.0.2"
+            - name: Debug APK output
+            run:Is -R bin
