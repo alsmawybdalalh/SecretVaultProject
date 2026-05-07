@@ -1,28 +1,21 @@
 [app]
 title = SecretVault
 package.name = secretvault
-package.domain = org.vault
+package.domain = org.example
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,json
+source.include_exts = py,png,jpg,kv
 
 version = 1.0
 
 requirements = python3,kivy==2.3.1
 
 orientation = portrait
-fullscreen = 0
-
-android.permissions = INTERNET,VIBRATE
 
 android.api = 33
 android.minapi = 21
-android.archs = arm64-v8a,armeabi-v7a
+android.ndk = 25.2.9519653
 
-android.build_tools_version = 33.0.2
-android.accept_sdk_license = True
+p4a.branch = master
 
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
+android.archs = arm64-v8a, armeabi-v7a
