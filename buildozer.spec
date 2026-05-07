@@ -15,7 +15,6 @@ orientation = portrait
 android.api = 33
 android.minapi = 21
 android.ndk = 23b
-android.sdk_path = /home/runner/.buildozer/android/platform/android-sdk
 
 android.archs = arm64-v8a
 
