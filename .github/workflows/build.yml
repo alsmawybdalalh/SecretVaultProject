@@ -13,20 +13,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
           sudo apt update
           sudo apt install -y zip unzip git openjdk-17-jdk python3-pip
           pip3 install --upgrade pip
           pip3 install buildozer cython
 
+      # 🔥 الحل الأساسي: قبول الرخص
       - name: Accept Android licenses
-        run: yes | sdkmanager --licenses || true
+        run: |
+          yes | sdkmanager --licenses
 
+      # 🔥 تثبيت أدوات Android بشكل ثابت (حل مشكلة build-tools 37)
+      - name: Install Android SDK components
+        run: |
+          sdkmanager "platform-tools" \
+                     "platforms;android-33" \
+                     "build-tools;33.0.2"
+
+      # 🔥 بناء التطبيق
       - name: Build APK
         run: |
           buildozer -v android debug
 
+      # 📦 رفع APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
