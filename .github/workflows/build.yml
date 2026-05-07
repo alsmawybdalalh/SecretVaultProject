@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -27,27 +27,24 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip build-essential autoconf libtool pkg-config zlib1g-dev libffi-dev libssl-dev libncurses5 libncursesw5 cmake
+          sudo apt install -y build-essential git zip unzip libtool pkg-config zlib1g-dev libncurses5 libncursesw5 cmake libffi-dev libssl-dev
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
           cmdline-tools-version: 11076708
-          packages: 'platform-tools platforms;android-33 build-tools;33.0.2'
+          packages: 'platform-tools platforms;android-33 build-tools;33.0.2 build-tools;37.0.0'
 
-      - name: Install Buildozer
+      - name: Accept all SDK licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null
+
+      - name: Install buildozer
         run: |
           pip install --upgrade pip
           pip install buildozer==1.5.0 cython==0.29.33
 
-      - name: Set SDK env vars
-        run: |
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
-          echo "PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/33.0.2" >> $GITHUB_ENV
-
       - name: Build APK
-        run: |
-          buildozer android debug
+        run: buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
