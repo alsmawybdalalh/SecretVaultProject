@@ -4,7 +4,7 @@ package.name = secretvault
 package.domain = org.example
 
 source.dir = .
-source.include_exts = py,png,jpg,kv
+source.include_exts = py,png,jpg,kv,txt
 
 version = 1.0
 
