@@ -1,25 +1,26 @@
 [app]
 title = SecretVault
 package.name = secretvault
-package.domain = org.example
+package.domain = org.secretvault
 
 source.dir =.
-source.include_exts = py,png,jpg,kv,txt
-
+source.include_exts = py,png,jpg,kv,atlas,ttf,json
 version = 1.0
 
-requirements = python3,kivy==2.3.0,sdl2,pyjnius,android
+requirements = python3,kivy==2.3.0,cryptography
 
 orientation = portrait
+log_level = 2
 
+fullscreen = 0
+
+android.permissions = INTERNET
 android.api = 33
 android.minapi = 21
 android.ndk = 23b
-
 android.archs = arm64-v8a
 
 p4a.branch = master
 
-   git add buildozer.spec .github/workflows/build.yml
-   git commit -m "Fix SDK path + add cache clean"
-   git push
+[buildozer]
+warn_on_root = 1
