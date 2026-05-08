@@ -29,7 +29,7 @@ jobs:
         run: pip install buildozer==1.5.0 cython==0.29.33
 
       - name: Clean old cache
-        run: rm -rf.buildozer bin
+        run: rm -rf .buildozer bin
 
       - name: Build APK
         run: buildozer android debug
