@@ -17,7 +17,6 @@ fullscreen = 0
 android.permissions = INTERNET
 android.api = 33
 android.minapi = 21
-android.api = 33
 android.archs = arm64-v8a
 
 p4a.branch = master
