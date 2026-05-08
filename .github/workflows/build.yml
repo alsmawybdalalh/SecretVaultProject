@@ -1,10 +1,13 @@
 name: Build SecretVault APK
-
 on: [push, workflow_dispatch]
 
 jobs:
   build:
     runs-on: ubuntu-22.04
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/27.3.13750724
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,18 +23,17 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          packages: 'platform-tools platforms;android-33 build-tools;37.0.0'
+          cmdline-tools-version: 12.0
+          packages: 'platform-tools platforms;android-33 build-tools;37.0.0 ndk;27.3.13750724'
           accept-android-sdk-licenses: true
 
       - name: Install buildozer
         run: pip install buildozer==1.5.0 cython==0.29.33
 
-      - name: Clean old cache
-        run: rm -rf .buildozer bin
+      - name: Clean cache
+        run: rm -rf.buildozer bin
 
       - name: Build APK
-        env:
-          ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
         run: buildozer android debug
 
       - uses: actions/upload-artifact@v4
