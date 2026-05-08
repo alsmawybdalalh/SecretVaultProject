@@ -19,3 +19,7 @@ android.ndk = 23b
 android.archs = arm64-v8a
 
 p4a.branch = master
+
+   git add buildozer.spec .github/workflows/build.yml
+   git commit -m "Fix SDK path + add cache clean"
+   git push
